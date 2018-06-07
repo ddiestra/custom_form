@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Contains Custom Form Module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Config;
+
+/**
+ * Implements hook_help().
+ */
+function custom_form_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.custom_form':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This is just a simple test to show some basic drupal knowledge, develop by <a href=":github">ddiestra</a>.', [':github' => 'https://github.com/ddiestra']) . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  switch ($form_id) {
+    case 'system_site_information_settings':
+      
+      $form['site_extra'] = [
+        '#type' => 'details',
+        '#title' => t('Site Extra Info'),
+        '#open' => TRUE,
+      ];
+
+      $apikey = Drupal::config('custom_form.settings')->get('siteapikey');
+
+      $form['site_extra']['siteapikey'] = [
+        '#type' => 'textfield',
+        '#title' => t('Site API Key'),
+        '#default_value' => $apikey,
+        '#required' => TRUE,
+      ];
+
+      $form['actions']['submit']['#value'] = t('Update Configuration');
+      $form['actions']['submit']['#submit'][] = 'custom_form_site_info_submit';
+
+      break;
+  }
+}
+
+/**
+ * handles extra submit to().
+ */
+function custom_form_site_info_submit(array &$form, FormStateInterface $form_state){
+
+  $value = $form_state->getValue('siteapikey');
+  $config = Drupal::configFactory()->getEditable('custom_form.settings');
+  $config->set('siteapikey', $value)->save();
+  
+  drupal_set_message(t('Site API Key has been saved with ":value"', [':value' => $value]));
+
+}
+
+
+
+
+
+
+
+
+
+
+

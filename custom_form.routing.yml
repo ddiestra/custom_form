@@ -1,0 +1,6 @@
+page_json:
+  path: '/page_json/{apikey}/{nid}'
+  defaults:
+    _controller: '\Drupal\custom_form\Controller\ViewController::view'
+  requirements: 
+    _access: 'TRUE'

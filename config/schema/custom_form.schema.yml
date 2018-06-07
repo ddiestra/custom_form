@@ -1,0 +1,7 @@
+custom_form.settings:
+  type: config_object
+  label: 'Custom form settings'
+  mapping:
+    siteapikey:
+      type: text
+      label: 'Site API Key'

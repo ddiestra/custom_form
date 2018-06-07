@@ -1,0 +1,5 @@
+name: 'Custom Form'
+type: module
+description: 'Custom Form develop by ddiestra'
+package: Ddiestra
+core: 8.x
