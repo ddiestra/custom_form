@@ -29,7 +29,7 @@ function custom_form_form_alter(&$form, FormStateInterface $form_state, $form_id
 
   switch ($form_id) {
     case 'system_site_information_settings':
-      
+
       $form['site_extra'] = [
         '#type' => 'details',
         '#title' => t('Site Extra Info'),
@@ -53,25 +53,14 @@ function custom_form_form_alter(&$form, FormStateInterface $form_state, $form_id
 }
 
 /**
- * handles extra submit to().
+ * Handles extra submit to().
  */
-function custom_form_site_info_submit(array &$form, FormStateInterface $form_state){
+function custom_form_site_info_submit(array &$form, FormStateInterface $form_state) {
 
   $value = $form_state->getValue('siteapikey');
   $config = Drupal::configFactory()->getEditable('custom_form.settings');
   $config->set('siteapikey', $value)->save();
-  
+
   drupal_set_message(t('Site API Key has been saved with ":value"', [':value' => $value]));
 
 }
-
-
-
-
-
-
-
-
-
-
-

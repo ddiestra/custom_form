@@ -2,11 +2,10 @@
 
 namespace Drupal\custom_form\Controller;
 
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\node\Entity\Node;
-use Drupal;
-
 
 /**
  * ViewController.
@@ -33,10 +32,9 @@ class ViewController extends ControllerBase {
         return new JsonResponse(['node' => $data]);
       }
 
-
     }
 
-    throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException();
+    throw new AccessDeniedHttpException();
   }
 
 }
