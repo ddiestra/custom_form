@@ -53,7 +53,7 @@ function custom_form_form_alter(&$form, FormStateInterface $form_state, $form_id
 }
 
 /**
- * Handles extra submit to().
+ * Handles extra submit.
  */
 function custom_form_site_info_submit(array &$form, FormStateInterface $form_state) {
 
